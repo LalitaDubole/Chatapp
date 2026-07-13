@@ -108,4 +108,4 @@ The server starts and listens for incoming client connections on a fixed port. E
 ## 👩‍💻 Author
 
 **Lalita Dubole**
-MCA Student | Java & Full-Stack Developer
+   MCA Student 
