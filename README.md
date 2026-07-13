@@ -1,196 +1,111 @@
- 💬 Java Socket Programming Chat App
+# Java Socket Programming Chat App
 
+A real-time, multi-user desktop chat application built with Java Socket Programming, Multithreading, and MySQL. It features a Java Swing GUI, a multithreaded server capable of handling multiple simultaneous clients, secure login/registration, persistent chat history, and a live online users list.
 
+---
 
-A desktop chat application built with \*\*Java Swing GUI\*\*, \*\*Socket Programming\*\*, and \*\*Multithreading\*\*, using \*\*JDBC + MySQL\*\* for persistent storage of users and messages.
+## 🚀 Key Features
 
+- **Real-time Messaging**: Instant message broadcast between all connected clients over a TCP socket connection.
 
+- **Multithreaded Server**: Every connected client is handled on its own dedicated thread (`ClientHandler`), allowing multiple users to chat simultaneously without blocking each other.
 
-\## 🚀 Features
+- **User Authentication**: Secure login and registration system backed by a MySQL database.
 
+- **Persistent Chat History**: The last 50 messages are automatically loaded and displayed when a user logs in.
 
+- **Live Online Users List**: See who's currently online in real time, updated instantly as users join or leave.
 
-\- Real-time messaging between client and server using TCP sockets
+- **Event Logging**: User join and leave events are logged to the database for tracking activity.
 
-\- Multithreaded server (`ClientHandler`) to support multiple simultaneous clients
+---
 
-\- User authentication (Login) backed by MySQL database
+## 🛠️ Tech Stack
 
-\- Message history stored and retrieved via JDBC
+- **Language**: Java
+- **GUI**: Java Swing
+- **Networking**: Socket Programming (TCP)
+- **Concurrency**: Multithreading
+- **Database**: MySQL
+- **DB Connectivity**: JDBC (MySQL Connector/J 9.7.0)
 
-\- Simple, intuitive Swing-based desktop GUI
+---
 
+## 📁 Project Structure
 
-
-\## 🛠️ Tech Stack
-
-
-
-\- \*\*Language:\*\* Java
-
-\- \*\*GUI:\*\* Java Swing
-
-\- \*\*Networking:\*\* Java Socket Programming (TCP)
-
-\- \*\*Concurrency:\*\* Multithreading
-
-\- \*\*Database:\*\* MySQL
-
-\- \*\*Database Connectivity:\*\* JDBC (MySQL Connector/J 9.7.0)
-
-
-
-\## 📁 Project Structure
-
+```
 Chatapp/
-
 ├── src/
-
 │   ├── client/
-
 │   │   ├── Client.java              # Client-side socket connection logic
-
 │   │   └── MessageListener.java     # Listens for incoming messages
-
 │   ├── server/
-
-│   │   ├── Server.java              # Server that accepts client connections
-
+│   │   ├── Server.java              # Accepts and manages client connections
 │   │   └── ClientHandler.java       # Handles each client on a separate thread
-
 │   ├── gui/
-
 │   │   ├── LoginFrame.java          # Login screen
-
 │   │   └── ChatFrame.java           # Main chat window
-
 │   ├── db/
-
-│   │   └── DBConnection.java        # MySQL database connection setup
-
+│   │   └── DBConnection.java        # MySQL connection setup
 │   └── dao/
-
 │       ├── UserDAO.java             # User-related database operations
-
 │       └── MessageDAO.java          # Message-related database operations
-
 ├── sql/
-
 │   └── schema.sql                   # Database schema
-
 ├── lib/
-
 │   └── mysql-connector-j-9.7.0.jar  # MySQL JDBC driver
-
-├── run\_server.bat                   # Script to run the server
-
-├── run\_client.bat                   # Script to run the client
-
-└── build.bat                        # Build script
-
-\## ⚙️ Setup \& Installation
-
-
-
-\### Prerequisites
-
-\- Java JDK installed
-
-\- MySQL Server installed and running
-
-
-
-\### Steps
-
-
-
-1\. \*\*Clone the repository\*\*
-
-```bash
-
-&#x20;  git clone https://github.com/LalitaDubole/Chatapp.git
-
-&#x20;  cd Chatapp
-
+├── run_server.bat
+├── run_client.bat
+└── build.bat
 ```
 
+---
 
+## ⚙️ Getting Started
 
-2\. \*\*Set up the database\*\*
+### Prerequisites
+- Java JDK installed
+- MySQL Server (or XAMPP) running
 
-&#x20;   - Open MySQL and run the schema file:
+### Installation
 
+**1. Clone the repository**
 ```bash
-
-&#x20;  mysql -u root -p < sql/schema.sql
-
+git clone https://github.com/LalitaDubole/Chatapp.git
+cd Chatapp
 ```
 
-
-
-3\. \*\*Configure database connection\*\*
-
-&#x20;   - Update credentials (URL, username, password) in `src/db/DBConnection.java` as per your MySQL setup.
-
-
-
-4\. \*\*Build the project\*\*
-
+**2. Set up the database**
 ```bash
-
-&#x20;  build.bat
-
+mysql -u root -p < sql/schema.sql
 ```
 
+**3. Configure the connection**
 
+Update the credentials in `src/db/DBConnection.java` to match your MySQL setup.
 
-5\. \*\*Run the server\*\*
-
+**4. Build the project**
 ```bash
-
-&#x20;  run\_server.bat
-
+build.bat
 ```
 
-
-
-6\. \*\*Run the client\*\* (in a new terminal, repeat for multiple clients)
-
+**5. Start the server**
 ```bash
-
-&#x20;  run\_client.bat
-
+run_server.bat
 ```
 
+**6. Start a client** (repeat in a new terminal for each user)
+```bash
+run_client.bat
+```
 
+## 🧩 How It Works
 
-\## 🧩 How It Works
+The server starts and listens for incoming client connections on a fixed port. Every client that connects gets its own `ClientHandler` thread, which is what allows multiple people to chat at the same time without blocking each other. The client connects via a socket and sends/receives messages using the protocol above, while all messages and user data are persisted in MySQL through the DAO layer.
 
+---
 
+## 👩‍💻 Author
 
-1\. The \*\*Server\*\* starts and listens for incoming client connections on a designated port.
-
-2\. Each connecting client is handled by a new \*\*ClientHandler\*\* thread, enabling concurrent multi-user chat.
-
-3\. The \*\*Client\*\* app connects to the server via sockets and sends/receives messages in real time.
-
-4\. User credentials and chat messages are persisted in \*\*MySQL\*\* through the DAO layer.
-
-
-
-\## 👩‍💻 Author
-
-
-
-\*\*Lalita Dubole\*\*  
-
-MCA Student 
-
-
-
-\## 📄 License
-
-
-
-This project is open source and available for educational purposes.
-
+**Lalita Dubole**
+MCA Student | Java & Full-Stack Developer
